@@ -23,6 +23,8 @@ namespace PlatformService
             services.AddDbContext<AppDbContext>(o => 
                 o.UseInMemoryDatabase("InMem"));
 
+            services.AddScoped<IPlatformRepository, PlatformRepository>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
