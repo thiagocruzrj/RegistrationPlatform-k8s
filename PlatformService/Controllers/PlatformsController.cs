@@ -4,7 +4,6 @@ using PlatformService.Data;
 using PlatformService.Dtos;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PlatformService.Controllers
 {
@@ -28,6 +27,20 @@ namespace PlatformService.Controllers
             var platformItens = _repository.GetAllPlatforms();
 
             return Ok(_mapper.Map<IEnumerable<PlatformReadDto>>(platformItens));
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<PlatformReadDto> GetPlatform(int id)
+        {
+            Console.WriteLine("--> Getting Platform...");
+            var platformItens = _repository.GetPlatformById(id);
+
+            if(platformItens != null)
+            {
+                return Ok(_mapper.Map<PlatformReadDto>(platformItens));
+            }
+
+            return NotFound();
         }
     }
 }
